@@ -1,5 +1,6 @@
 import numpy as np
 import unsio.input as uns_in
+import tables
 
 
 class Gahdf5:
@@ -32,3 +33,11 @@ class Gahdf5:
                 all_data = uns.getData(all_components, all_props)[1]
                 computational[all_components].update({all_props: all_data})
         return computational
+
+    def to_hdf5(self):
+        parttypes = "Header,PartType0,PartType1,PartType2,PartType3,PartType4,PartType5"
+        gadget_file_data = self.create_data()
+        hdf5_file = tables.open_file(f"{self.base_name}.hdf5", "w")
+        for parts in parttypes.split(","):
+            hdf5_file.create_group("/", parts)
+        
