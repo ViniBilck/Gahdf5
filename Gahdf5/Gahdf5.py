@@ -22,7 +22,7 @@ class Gahdf5:
 
         :return computational: A variable with all data
         """
-        components = "gas,disk,halo,dm,stars,bulge,bndry"
+        components = "gas,halo,disk,bulge,stars,bndry"
         prop = "pos,vel,mass,acc,pot,rho,hsml,temp,age,metal,u,id,aux,keys"
         uns = uns_in.CUNS_IN(self.base_name, "all", "all", True)
         ok = uns.nextFrame("")
@@ -40,4 +40,3 @@ class Gahdf5:
         hdf5_file = tables.open_file(f"{self.base_name}.hdf5", "w")
         for parts in parttypes.split(","):
             hdf5_file.create_group("/", parts)
-        
