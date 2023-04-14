@@ -62,3 +62,4 @@ class Gahdf5:
             hdf5_file.root.Header._v_attrs.NumPart_ThisFile = num_part
             hdf5_file.root.Header._v_attrs.NumPart_Total = num_part
             hdf5_file.root.Header._v_attrs.MassTable = np.array([0, 0, 0, 0, 0, 0])
+            hdf5_file.root.Header._v_attrs.Time = 0.
