@@ -62,4 +62,11 @@ class Gahdf5:
             hdf5_file.root.Header._v_attrs.NumPart_ThisFile = num_part
             hdf5_file.root.Header._v_attrs.NumPart_Total = num_part
             hdf5_file.root.Header._v_attrs.MassTable = np.array([0, 0, 0, 0, 0, 0])
-            hdf5_file.root.Header._v_attrs.Time = 0.
+            hdf5_file.root.Header._v_attrs.Time = 1.
+            hdf5_file.root.Header._v_attrs.Redshift = 0.
+            hdf5_file.root.Header._v_attrs.BoxSize = 35000.
+            hdf5_file.root.Header._v_attrs.HubbleParam = 0.6774
+            hdf5_file.root.Header._v_attrs.Omega0 = 0.3089
+            hdf5_file.root.Header._v_attrs.OmegaBaryon = 0.0486
+            hdf5_file.root.Header._v_attrs.OmegaLambda = 0.6911
+            hdf5_file.root.Header._v_attrs.NumFilesPerSnapshot = 1
