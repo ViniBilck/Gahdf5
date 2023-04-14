@@ -43,8 +43,10 @@ class Gahdf5:
         the base Gadget-2/3 initial condition file
         """
         gadget_file_data = self.create_data()
+        num_part = np.array([])
         with tables.open_file(f"{self.base_name}.hdf5", "w") as hdf5_file:
             for hdf5_parts, gadget_parts in zip(self.parttypes_in_hdf5, self.parttypes_in_gadget):
+                num_part = np.append(num_part, len(gadget_file_data[gadget_parts]["id"]))
                 hdf5_file.create_group("/", hdf5_parts)
                 print(f"Translating Gadget-2/3 {gadget_parts} components to HDF5 {hdf5_parts}")
                 for hdf5_props, gadget_props in zip(self.properties_in_hdf5, self.properties_in_gadget):
@@ -56,3 +58,6 @@ class Gahdf5:
                     if (hdf5_props != 'Coordinates') & (hdf5_props != 'Velocities'):
                         new_vector = gadget_file_data[gadget_parts][gadget_props]
                         hdf5_file.create_array(getattr(hdf5_file.root, hdf5_parts), hdf5_props, new_vector)
+            hdf5_file.create_group("/", "Header")
+            hdf5_file.root.Header._v_attrs.NumPart_ThisFile = num_part
+            hdf5_file.root.Header._v_attrs.NumPart_Total = num_part
