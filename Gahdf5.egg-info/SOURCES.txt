@@ -1,0 +1,9 @@
+LICENSE
+setup.py
+Gahdf5/Gahdf5.py
+Gahdf5/__init__.py
+Gahdf5.egg-info/PKG-INFO
+Gahdf5.egg-info/SOURCES.txt
+Gahdf5.egg-info/dependency_links.txt
+Gahdf5.egg-info/top_level.txt
+bin/convert_to_hdf5

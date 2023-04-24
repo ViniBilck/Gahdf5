@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: Gahdf5
+Version: 0.1
+Summary: Do something
+Home-page: https://github.com/vinibilck/Gahdf5
+Author: Vinicius Lourival Bilck
+Author-email: bilck.vinicius1998@gmail.com
+License: GPLv3
+Classifier: Programming Language :: Python :: 3.7
+Requires-Python: >=3.7
+License-File: LICENSE
