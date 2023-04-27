@@ -37,16 +37,26 @@ class Gahdf5:
                 computational[all_parttypes].update({all_props: all_data})
         return computational
 
-    def to_hdf5(self):
+    def to_hdf5(self, not_include: str = "no"):
         """
         Create a hdf5 file format with all the data of
         the base Gadget-2/3 initial condition file
         """
+        parttypes_in_hdf5 = self.parttypes_in_hdf5
+        parttypes_in_gadget = self.parttypes_in_gadget
+        num_part_ones = [1,1,1,1,1,1]
+        num_part = []
+        if not_include != "no":
+            if len(not_include.split(",")) > 0:
+                for i in not_include.split(","):
+                    index = parttypes_in_hdf5.index(i)
+                    del(parttypes_in_hdf5[index])
+                    del(parttypes_in_gadget[index])
+                    num_part_ones[index] = 0
         gadget_file_data = self.create_data()
-        num_part = np.array([])
         with tables.open_file(f"{self.base_name}.hdf5", "w") as hdf5_file:
-            for hdf5_parts, gadget_parts in zip(self.parttypes_in_hdf5, self.parttypes_in_gadget):
-                num_part = np.append(num_part, len(gadget_file_data[gadget_parts]["id"]))
+            for hdf5_parts, gadget_parts in zip(parttypes_in_hdf5, parttypes_in_gadget):
+                num_part.append(len(gadget_file_data[gadget_parts]["id"]))
                 hdf5_file.create_group("/", hdf5_parts)
                 print(f"Translating Gadget-2/3 {gadget_parts} components to HDF5 {hdf5_parts}")
                 for hdf5_props, gadget_props in zip(self.properties_in_hdf5, self.properties_in_gadget):
@@ -58,9 +68,12 @@ class Gahdf5:
                     if (hdf5_props != 'Coordinates') & (hdf5_props != 'Velocities'):
                         new_vector = gadget_file_data[gadget_parts][gadget_props]
                         hdf5_file.create_array(getattr(hdf5_file.root, hdf5_parts), hdf5_props, new_vector)
+            for ones in range(len(num_part_ones)):
+                if num_part_ones[ones] == 1:
+                    num_part_ones[ones] = num_part.pop(0)
             hdf5_file.create_group("/", "Header")
-            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_ThisFile = num_part
-            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_Total = num_part
+            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_ThisFile = num_part_ones
+            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_Total = num_part_ones
             getattr(hdf5_file.root.Header, "_v_attrs").MassTable = np.array([0, 0, 0, 0, 0, 0])
             getattr(hdf5_file.root.Header, "_v_attrs").Time = 1.
             getattr(hdf5_file.root.Header, "_v_attrs").Redshift = 0.

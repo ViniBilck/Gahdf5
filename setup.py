@@ -13,7 +13,7 @@ setup(
     version="0.1",
     packages=['Gahdf5'],
     package_data=package_data,
-    scripts=['bin/convert_to_hdf5'],
+    scripts=['bin/convert_to_hdf5', 'bin/without_parttype', 'bin/inside_hdf5'],
     description="Do something",
     author="Vinicius Lourival Bilck",
     author_email="bilck.vinicius1998@gmail.com",

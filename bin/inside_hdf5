@@ -1,0 +1,14 @@
+import argparse
+import tables
+
+def main(file_in):
+    with tables.open_file(file_in, "r") as file:
+        print(dir(file.root)[:8])
+        print(file.root.Header._v_attrs.NumPart_ThisFile)
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser()
+    parser.add_argument("file_name", help="Data file.")
+
+    args = parser.parse_args()
+    main(file_in=args.file_name)
