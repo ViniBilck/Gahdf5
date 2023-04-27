@@ -2,8 +2,8 @@ from numpy.distutils.core import setup
 
 package_data = {
     'Gahdf5': [
-        'Gahdf5/*',
-        'Tests/*',
+        'gahdf5/*',
+        'tests/*',
     ]
 }
 

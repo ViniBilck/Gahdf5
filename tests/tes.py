@@ -1,5 +1,5 @@
 import unittest
-from Gahdf5.Gahdf5 import Gahdf5
+from gahdf5.Gahdf5 import Gahdf5
 
 
 class Gahdf5TestCase(unittest.TestCase):

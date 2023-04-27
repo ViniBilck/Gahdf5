@@ -1,5 +1,5 @@
 import argparse
-from Gahdf5.Gahdf5 import Gahdf5
+from gahdf5.Gahdf5 import Gahdf5
 
 def main(file_in):
     a = Gahdf5(file_in)
