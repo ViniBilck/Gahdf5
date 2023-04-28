@@ -11,7 +11,7 @@ setup(
     name='Gahdf5',
     python_requires='>=3.7',
     version="0.1",
-    packages=['Gahdf5'],
+    packages=['gahdf5'],
     package_data=package_data,
     scripts=['bin/convert_to_hdf5', 'bin/without_parttype', 'bin/inside_hdf5'],
     description="Do something",
