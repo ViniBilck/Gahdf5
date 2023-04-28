@@ -72,8 +72,8 @@ class Gahdf5:
                 if num_part_ones[ones] == 1:
                     num_part_ones[ones] = num_part.pop(0)
             hdf5_file.create_group("/", "Header")
-            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_ThisFile = num_part_ones
-            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_Total = num_part_ones
+            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_ThisFile = np.array(num_part_ones)
+            getattr(hdf5_file.root.Header, "_v_attrs").NumPart_Total = np.array(num_part_ones)
             getattr(hdf5_file.root.Header, "_v_attrs").MassTable = np.array([0, 0, 0, 0, 0, 0])
             getattr(hdf5_file.root.Header, "_v_attrs").Time = 1.
             getattr(hdf5_file.root.Header, "_v_attrs").Redshift = 0.

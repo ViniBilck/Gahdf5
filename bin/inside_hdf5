@@ -5,6 +5,7 @@ def main(file_in):
     with tables.open_file(file_in, "r") as file:
         print(dir(file.root)[:8])
         print(file.root.Header._v_attrs.NumPart_ThisFile)
+        print(type(file.root.Header._v_attrs.NumPart_ThisFile))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
